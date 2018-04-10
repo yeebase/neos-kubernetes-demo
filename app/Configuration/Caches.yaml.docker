@@ -1,0 +1,3 @@
+Yeebase_Readiness_LocalLock:
+  frontend: Neos\Cache\Frontend\StringFrontend
+  backend: Neos\Cache\Backend\FileBackend

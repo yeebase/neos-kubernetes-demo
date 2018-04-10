@@ -1,0 +1,26 @@
+Yeebase:
+  Graylog:
+    host: '{{ .Values.graylog.host }}'
+  Readiness:
+    lockPrefix: "neosdemo"
+    testChain:
+      redis:
+        options:
+          hostname: 'neosdemo-redis'
+    readyChain:
+      flushRedis:
+        name: 'Flush redis'
+        position: 'start 100'
+        task: 'redis'
+        options:
+          hostname: 'neosdemo-redis'
+          command: 'FLUSHDB'
+          database: 0
+      staticressources:
+        name: 'Publish static resources'
+        task: 'command'
+        position: 'end 20'
+        lockName: 'staticresources'
+        cacheName: 'Yeebase_Readiness_LocalLock'
+        options:
+          command: 'neos.flow:resource:publish'
