@@ -7,7 +7,18 @@ Yeebase:
       redis:
         options:
           hostname: 'neosdemo-redis'
+      database:
+        test: doctrine
+        position: start
     readyChain:
+      migrations:
+        task: command
+        options:
+          command: 'neos.flow:doctrine:migrate'
+      publish:
+        task: command
+        options:
+          command: 'neos.flow:resource:publish'
       flushRedis:
         name: 'Flush redis'
         position: 'start 100'
